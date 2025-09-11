@@ -1,0 +1,18 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: products-service
+
+# Registrar y descubrir servicios vía Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+# Feign configuraciones útiles
+feign:
+  httpclient:
+    enabled: true
+  circuitbreaker:
+    enabled: false # Puede habilitarse si se enseña resiliencia
