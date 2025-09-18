@@ -1,6 +1,6 @@
 package com.example.labs.products.web;
 
-import com.example.labs.products.dto.Product;
+import com.example.common.dto.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
