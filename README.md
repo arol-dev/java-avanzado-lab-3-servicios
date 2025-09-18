@@ -30,6 +30,6 @@ Feign Clients.
 
 ## Objetivo
 
-- Crear un nuevo endpoint orders with products expuesto desde el gateway
-- Usar Feign para comunicar con el servicio de orders con el de products y
+- [x] Crear un nuevo endpoint orders with products expuesto desde el gateway
+- [x] Usar Feign para comunicar con el servicio de orders con el de products y
   retornar una respuesta con ambos datos

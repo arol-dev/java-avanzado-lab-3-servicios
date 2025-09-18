@@ -23,6 +23,7 @@
     <module>gateway</module>
     <module>products-service</module>
     <module>orders-service</module>
+    <module>common-dtos</module>
   </modules>
 
   <dependencyManagement>

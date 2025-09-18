@@ -1,0 +1,28 @@
+### Order Service
+
+### All orders
+GET http://localhost:8082/api/orders/
+Accept: application/json
+
+### orders with products
+
+GET localhost:8082/api/orders/with-products
+Accept: application/json
+
+### Products
+
+GET localhost:8081/api/products
+Accept: application/json
+
+### Gateway - orders
+
+GET localhost:8080/api/orders/
+Accept: application/json
+
+### Gateway - orders with products
+GET localhost:8080/api/orders/with-products
+Accept: application/json
+
+### Gateway - products
+GET localhost:8080/api/products
+Accept: application/json
