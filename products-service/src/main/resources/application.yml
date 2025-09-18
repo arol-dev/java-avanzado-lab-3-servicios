@@ -15,4 +15,4 @@ feign:
   httpclient:
     enabled: true
   circuitbreaker:
-    enabled: false # Puede habilitarse si se enseña resiliencia
+    enabled: false

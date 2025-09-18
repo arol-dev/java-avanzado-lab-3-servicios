@@ -1,23 +1,23 @@
 package com.example.labs.products.web;
 
+import com.example.common.dto.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
 
     @GetMapping
-    public ResponseEntity<List<Map<String, Object>>> all() {
+    public ResponseEntity<List<Product>> all() {
         return ResponseEntity.ok(
                 List.of(
-                        Map.of("id", 1, "name", "Teclado", "price", 20.5),
-                        Map.of("id", 2, "name", "Mouse", "price", 10.0)
+                        new Product(1, "Teclado", 20.5),
+                        new Product(2, "Mouse", 10.0)
                 )
         );
     }
