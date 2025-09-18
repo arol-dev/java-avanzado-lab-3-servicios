@@ -26,3 +26,8 @@ Accept: application/json
 ### Gateway - products
 GET localhost:8080/api/products
 Accept: application/json
+
+
+### Gateway - order with products - v2
+GET localhost:8080/api/orders/v2/with-products
+Accept: application/json

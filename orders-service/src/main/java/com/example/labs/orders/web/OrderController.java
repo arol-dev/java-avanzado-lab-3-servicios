@@ -3,6 +3,7 @@ package com.example.labs.orders.web;
 import com.example.labs.orders.clients.ProductsClient;
 import com.example.labs.orders.dto.Order;
 import com.example.labs.orders.dto.OrderProduct;
+import com.example.labs.orders.dto.OrderWithProduct;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,22 @@ public class OrderController {
                                 .filter(product -> product.id().equals(order.productId()))
                                 .findFirst().orElseThrow()))
                         .toList()
+        );
+
+    }
+
+    @GetMapping("/v2/with-products")
+    public ResponseEntity<List<OrderWithProduct>> ordersWithProductsV2() {
+        var products = productsClient.all();
+        return ResponseEntity.ok(
+                orderList.stream().map(order -> new OrderWithProduct(
+                                order.id(),
+                                products.stream()
+                                        .filter(product -> product.id().equals(order.productId()))
+                                        .findFirst().orElseThrow(),
+                                order.date()
+                        )
+                ).toList()
         );
 
     }
