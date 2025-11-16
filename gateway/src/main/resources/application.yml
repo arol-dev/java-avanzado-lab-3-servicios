@@ -9,6 +9,14 @@ spring:
         locator:
           enabled: true # Permite enrutar automáticamente a servicios registrados en Eureka usando lb://SERVICE-NAME
       routes:
+        - id: products
+          uri: lb://products-service
+          predicates:
+            - Path=/api/products/**
+        - id: orders
+          uri: lb://orders-service
+          predicates:
+            - Path=/api/orders/**
       # TODO: Configurar rutas para products-service y orders-service
 
 # Configurar la URL del servidor Eureka al que el Gateway se registrará
@@ -18,4 +26,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone:
+      defaultZone: http://localhost:8761/eureka
