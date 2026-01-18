@@ -1,15 +1,18 @@
 package com.example.labs.orders.clients;
 
-import org.springframework.cloud.openfeign.FeignClient;
+import java.util.Map;
 
 /**
- * TODO (Estudiantes): Configurar Feign para invocar al servicio de Products.
- * - Usar serviceId (name) recomendando name="products-service" para discovery via Eureka.
+ * TODO: Configurar Feign para invocar al servicio de Products.
+ * - Usar serviceId (name) recomendando name="products-service" para discovery
+ * via Eureka.
  * - Declarar el endpoint remoto: GET /api/products
  */
-@FeignClient(name = "service-id")
+// TODO: Agregar anotación @FeignClient
+// @FeignClient(name = "products-service")
 public interface ProductsClient {
 
-    //TODO
-    // definir el método para invocar al servicio de products
+    // TODO: El estudiante debe mapear esto correctamente a GET /api/products/{id}
+    @org.springframework.web.bind.annotation.GetMapping("/api/products/{id}")
+    Map<String, Object> getProduct(@org.springframework.web.bind.annotation.PathVariable("id") int id);
 }

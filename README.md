@@ -1,35 +1,90 @@
-# Java Avanzado - Lab 3 - Servicios
+# Spring Cloud + Netflix Eureka: Tienda de Microservicios
 
-Este laboratorio contiene 4 módulos:
+🎓 **Laboratory: Java Avanzado - Spring Cloud**
 
-- eureka-server
-- gateway
-- products-service
-- orders-service
+Este repositorio contiene un laboratorio diseñado para aprender los fundamentos de **Spring Cloud**, **Service Discovery (Eureka)**, **Declarative Clients (Feign)** y **API Gateway (Spring Cloud Gateway)**.
 
-Objetivo: configurar un ecosistema de microservicios con Service Discovery (
-Eureka), API Gateway (Spring Cloud Gateway) y comunicación interna mediante
-Feign Clients.
+## 🏢 Escenario
 
-## Cómo ejecutar (orden recomendado)
+Simulamos una arquitectura de ecommerce simplificada donde:
 
-1. Compilar todo: `mvn -q -DskipTests package`
-2. Levantar Eureka: `mvn -q -pl eureka-server spring-boot:run`
-3. Levantar Gateway: `mvn -q -pl gateway spring-boot:run`
-4. Levantar Products: `mvn -q -pl products-service spring-boot:run`
-5. Levantar Orders: `mvn -q -pl orders-service spring-boot:run`
+- **Products Service**: Gestiona el catálogo de productos (puerto 8081).
+- **Orders Service**: Gestiona órdenes de compra (puerto 8082).
+- **Gateway**: Punto de entrada único para el sistema (puerto 8080).
+- **Eureka Server**: Registro de servicios (puerto 8761).
 
-## Endpoints de prueba
+El objetivo es conectar estos servicios que actualmente funcionan de forma aislada.
 
-- Eureka Dashboard: http://localhost:8761
-- Products directo: http://localhost:8081/api/products
-- Orders directo: http://localhost:8082/api/orders
-- A través del Gateway (rutas a configurar por el estudiante):
-    - http://localhost:8080/api/products
-    - http://localhost:8080/api/orders
+## 🎯 Objetivos de Aprendizaje
 
-## Objetivo
+- Comprender la función de un **Discovery Service** (Eureka).
+- Implementar comunicación entre microservicios usando **OpenFeign**.
+- Configurar un **API Gateway** para enrutamiento dinámico.
+- Escribir y pasar **Tests de Integración** que verifiquen la arquitectura.
 
-- Crear un nuevo endpoint orders with products expuesto desde el gateway
-- Usar Feign para comunicar con el servicio de orders con el de products y
-  retornar una respuesta con ambos datos
+## 🛠️ Stack Tecnológico
+
+- **Java 17**
+- **Spring Boot 3.3.3**
+- **Spring Cloud 2023.0.3**
+- **Netflix Eureka**
+- **OpenFeign**
+- **Spring Cloud Gateway**
+- **WireMock** (para tests)
+
+## 📂 Estructura del Proyecto
+
+```
+.
+├── docker-compose.yml
+├── docs/                   <-- 📘 DOCUMENTACIÓN DE EJERCICIOS
+├── eureka-server/
+├── gateway/                <-- Ejercicio 2
+├── orders-service/         <-- Ejercicio 1
+└── products-service/
+```
+
+## 📝 Ejercicios
+
+| # | Ejercicio | Archivo de Test | Documentación |
+|---|---|---|---|
+| 1 | **Comunicación con Feign** | [OrdersIntegrationTest.java](orders-service/src/test/java/com/example/labs/orders/OrdersIntegrationTest.java) | [Ver Guía](docs/ejercicio-1-feign.md) |
+| 2 | **Api Gateway Routing** | [GatewayIntegrationTest.java](gateway/src/test/java/com/example/labs/gateway/GatewayIntegrationTest.java) | [Ver Guía](docs/ejercicio-2-gateway.md) |
+
+## 🚀 Flujo de Trabajo
+
+1. **Leer la guía** del ejercicio en la carpeta `docs/`.
+2. **Abrir el archivo de test** indicado. Notarás que el test falla o falta implementación.
+3. **Completar los TODOs** en el código fuente (`src/main`) siguiendo la guía.
+4. **Verificar y Ejecutar** el test:
+
+    ```bash
+    # Para Ejercicio 1
+    mvn -pl orders-service -Dtest=OrdersIntegrationTest test
+    
+    # Para Ejercicio 2
+    mvn -pl gateway -Dtest=GatewayIntegrationTest test
+    ```
+
+## 🏃 Cómo Ejecutar (Manual)
+
+Si deseas levantar todo el entorno para pruebas manuales:
+
+1. Asegúrate de tener **Docker** en ejecución.
+2. Ejecuta:
+
+    ```bash
+    docker-compose up --build
+    ```
+
+3. Accede a:
+    - **Eureka Dashboard**: <http://localhost:8761>
+    - **Gateway**: <http://localhost:8080>
+
+## ❌ Troubleshooting
+
+| Error | Causa Posible | Solución |
+|---|---|---|
+| `Connection refused` | Servicios caídos o puertos ocupados. | Revisa `docker-compose ps` y libera puertos. |
+| `Load balancer does not contain an instance` | El servicio no se ha registrado en Eureka. | Espera unos segundos o revisa logs de Eureka. |
+| `FeigClient bean not found` | Falta `@EnableFeignClients`. | Revisa el Ejercicio 1. |
